@@ -1,6 +1,6 @@
 import copy
 from stable_baselines3.common.env_util import make_atari_env
-from stable_baselines3.common.vec_env import VecFrameStack
+from stable_baselines3.common.vec_env import VecFrameStack, VecTransposeImage
 from stable_baselines3.common.callbacks import EvalCallback, CheckpointCallback
 from stable_baselines3 import A2C
 import gym
@@ -8,7 +8,6 @@ from stable_baselines3 import PPO
 # from ale_py import ALEInterface
 import torch
 
-from stable_baselines3.common.vec_env import VecTransposeImage
 
 
 def main():
