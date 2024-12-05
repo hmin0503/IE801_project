@@ -233,3 +233,6 @@ $RECYCLE.BIN/
 
 
 *.zip
+logs/
+checkpoints/
+a2c_atari_tensorboard/
