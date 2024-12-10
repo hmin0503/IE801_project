@@ -1,0 +1,99 @@
+absl-py==2.1.0
+ale-py==0.8.1
+alembic==1.14.0
+annotated-types==0.7.0
+atari-py==0.2.9
+AutoROM==0.6.1
+Brotli @ file:///C:/b/abs_3d36mno480/croot/brotli-split_1714483178642/work
+cachetools==5.5.0
+certifi @ file:///home/conda/feedstock_root/build_artifacts/certifi_1725278078093/work/certifi
+charset-normalizer @ file:///croot/charset-normalizer_1721748349566/work
+click==8.1.7
+cloudpickle @ file:///home/conda/feedstock_root/build_artifacts/cloudpickle_1729059237860/work
+colorama==0.4.6
+colorlog==6.9.0
+contourpy @ file:///D:/bld/contourpy_1695554279172/work
+cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1696677705766/work
+docker-pycreds==0.4.0
+eval_type_backport==0.2.0
+Farama-Notifications @ file:///home/conda/feedstock_root/build_artifacts/farama-notifications_1684258120643/work
+filelock @ file:///C:/b/abs_f2gie28u58/croot/filelock_1700591233643/work
+fonttools @ file:///D:/bld/fonttools_1720359137189/work
+fsspec==2024.10.0
+gitdb==4.0.11
+GitPython==3.1.43
+gmpy2 @ file:///C:/ci/gmpy2_1645456279018/work
+google-auth==2.36.0
+google-auth-oauthlib==1.0.0
+greenlet==3.1.1
+grpcio==1.68.1
+gym @ file:///D:/bld/gym_1673322380470/work
+gym-notices @ file:///home/conda/feedstock_root/build_artifacts/gym-notices_1671541680412/work
+gymnasium==0.29.1
+huggingface-hub==0.26.5
+huggingface-sb3==3.0
+idna @ file:///C:/b/abs_aad84bnnw5/croot/idna_1714398896795/work
+importlib_metadata @ file:///home/conda/feedstock_root/build_artifacts/importlib-metadata_1726082825846/work
+importlib_resources @ file:///home/conda/feedstock_root/build_artifacts/importlib_resources_1725921340658/work
+jax-jumpy @ file:///home/conda/feedstock_root/build_artifacts/jax-jumpy_1679161251636/work
+Jinja2 @ file:///C:/b/abs_92fccttino/croot/jinja2_1716993447201/work
+kiwisolver @ file:///D:/bld/kiwisolver_1695380176938/work
+Mako==1.3.7
+Markdown==3.7
+markdown-it-py==3.0.0
+MarkupSafe @ file:///C:/b/abs_ecfdqh67b_/croot/markupsafe_1704206030535/work
+matplotlib @ file:///D:/bld/matplotlib-suite_1695077059522/work
+mdurl==0.1.2
+mkl-fft @ file:///C:/b/abs_19i1y8ykas/croot/mkl_fft_1695058226480/work
+mkl-random @ file:///C:/b/abs_edwkj1_o69/croot/mkl_random_1695059866750/work
+mkl-service==2.4.0
+mpmath @ file:///C:/b/abs_7833jrbiox/croot/mpmath_1690848321154/work
+munkres==1.1.4
+networkx @ file:///C:/b/abs_e6gi1go5op/croot/networkx_1690562046966/work
+numpy @ file:///C:/Users/dev-admin/mkl/numpy_and_numpy_base_1682982345978/work
+oauthlib==3.2.2
+opencv-python==4.7.0
+optuna==4.1.0
+packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1733203243479/work
+pandas @ file:///D:/bld/pandas_1688740647960/work
+pillow @ file:///C:/b/abs_32o8er3uqp/croot/pillow_1721059447598/work
+platformdirs==4.3.6
+protobuf==5.29.0
+psutil==6.1.0
+pyasn1==0.6.1
+pyasn1_modules==0.4.1
+pydantic==2.10.3
+pydantic_core==2.27.1
+Pygments==2.18.0
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1724616129934/work
+PySocks @ file:///C:/ci/pysocks_1605287845585/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1709299778482/work
+pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1726055524169/work
+PyYAML @ file:///C:/b/abs_14xkfs39bx/croot/pyyaml_1728657968772/work
+requests @ file:///C:/b/abs_9frifg92q2/croot/requests_1721410901096/work
+requests-oauthlib==2.0.0
+rich==13.9.4
+rsa==4.9
+sentry-sdk==2.19.2
+setproctitle==1.3.4
+Shimmy==1.3.0
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+smmap==5.0.1
+SQLAlchemy==2.0.36
+stable_baselines3 @ file:///home/conda/feedstock_root/build_artifacts/stable-baselines3_1714303096755/work
+sympy @ file:///C:/b/abs_4e4p71hdj_/croot/sympy_1724938208509/work
+tensorboard==2.14.0
+tensorboard-data-server==0.7.2
+torch==2.4.1
+torchaudio==2.4.1
+torchvision==0.20.0
+tqdm==4.67.1
+typing_extensions==4.12.2
+tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1727140567071/work
+unicodedata2 @ file:///D:/bld/unicodedata2_1695848058846/work
+urllib3 @ file:///C:/b/abs_9a_f8h_bn2/croot/urllib3_1727769836930/work
+wandb==0.19.0
+wasabi==1.1.3
+Werkzeug==3.0.6
+win-inet-pton @ file:///C:/ci/win_inet_pton_1605306167264/work
+zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1731262100163/work
