@@ -1,7 +1,7 @@
 import os
 from stable_baselines3.common.utils import get_latest_run_id
 import torch
-    
+from utils import linear_schedule
 
 '''FILE TO STORE ALL THE CONFIGURATION VARIABLES'''
 #environment_id
@@ -35,7 +35,7 @@ Hyperparameters of the model {learning_rate, gamma, device, n_steps, gae_lambda,
 policy = "CnnPolicy"
 
 #learning_rate is the learning rate of the model
-learning_rate =5e-4  #first trial: 5e-4   #second trial: 1e-4  #third trial: 1e-3  #fourth trial: 5e-5 #fifth trial: 5e-5 gamma = 0.90 #sixth trial: 1e-4 gamma = 0.90 #seventh trial: 5e-4 gamma = 0.90
+learning_rate = linear_schedule(2.5e-4) #5e-4  #first trial: 5e-4   #second trial: 1e-4  #third trial: 1e-3  #fourth trial: 5e-5 #fifth trial: 5e-5 gamma = 0.90 #sixth trial: 1e-4 gamma = 0.90 #seventh trial: 5e-4 gamma = 0.90
 
 #gamma is the discount factor
 gamma = 0.99
@@ -44,19 +44,19 @@ gamma = 0.99
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 #n_steps is the number of steps taken by the model before updating the parameters
-n_steps = 24
+n_steps = 128
 
 #batch_size is the number of samples used in each update
-batch_size = 96
+batch_size = 256
 
 #n_epochs is the number of epochs when optimizing the surrogate loss
-n_epochs = 6
+n_epochs = 4
 
 #gae_lambda is the lambda parameter of the generalized advantage estimation, set to 1 to disable it
 gae_lambda = 0.95
 
 #clip_range is the clipping parameter of the surrogate loss
-clip_range = 0.2
+clip_range = linear_schedule(0.1)
 
 #clip_range_vf is the clipping parameter of the value function
 clip_range_vf = 1
@@ -104,7 +104,7 @@ verbose = 2
 
 #seed is the seed for the pseudo random number generator used by the model. It is set to None to use a random seed,
 # and set to 0 to use a fixed seed for reproducibility
-seed = None
+seed = 0
 
 #_init_setup_model is a boolean that indicates if the model will be initialized after being created, set to True to initialize the model
 _init_setup_model = True
@@ -113,7 +113,7 @@ _init_setup_model = True
 #Take into account that the number of timesteps is not the number of episodes, in a game like breakout, the agent takes an action every frame,
 # then the number of timesteps is the number of frames, which is the number of frames in 1 game multiplied by the number of games played.
 #The average number of frames in 1 game is 1000, so 1e7 timesteps is 1000 games more or less.
-total_timesteps = int(1e6) # int(3e7)
+total_timesteps = int(1e7) # int(3e7)
 
 #log_interval is the number of timesteps between each log, in this case, the training process will be logged every 100 timesteps.
 log_interval = 100
@@ -124,7 +124,7 @@ Environment variables
 #n_stack is the number of frames stacked together to form the input to the model
 n_stack = 4
 #n_envs is the number of environments that will be run in parallel
-n_envs = 16
+n_envs = 8
 
 '''
 Wandb configuration

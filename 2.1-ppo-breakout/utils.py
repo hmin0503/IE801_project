@@ -6,7 +6,7 @@ from stable_baselines3.common.callbacks import BaseCallback
 import numpy as np
 import wandb
 from stable_baselines3.common.vec_env import VecFrameStack, DummyVecEnv
-
+from typing import Union, Callable
 '''
 The RewardLogger wrapper is used to log the rewards of each episode to wandb
 It makes sure that the rewards of each episode are stored in a list and that the current episode reward is reset
@@ -123,3 +123,24 @@ def unzip_file(zip_path, extract_to_folder):
     # Extract the zip file to the target folder
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         zip_ref.extractall(extract_to_folder)
+
+
+def linear_schedule(initial_value: Union[float, str]) -> Callable[[float], float]:
+    """
+    Linear learning rate schedule.
+
+    :param initial_value: (float or str)
+    :return: (function)
+    """
+    # Force conversion to float
+    initial_value_ = float(initial_value)
+
+    def func(progress_remaining: float) -> float:
+        """
+        Progress will decrease from 1 (beginning) to 0
+        :param progress_remaining: (float)
+        :return: (float)
+        """
+        return progress_remaining * initial_value_
+
+    return func

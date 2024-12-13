@@ -7,7 +7,7 @@ import torch
 import config
 import wandb
 from wandb.integration.sb3 import WandbCallback
-from utils import unzip_file, CustomWandbCallback
+from utils import unzip_file, CustomWandbCallback, linear_schedule
 import os
 
 '''
@@ -49,25 +49,25 @@ model = PPO(policy=config.policy
             ,batch_size=config.batch_size
             ,n_epochs=config.n_epochs
             ,gamma=config.gamma            
-            ,gae_lambda=config.gae_lambda
+            # ,gae_lambda=config.gae_lambda
             ,clip_range=config.clip_range
-            ,clip_range_vf=config.clip_range_vf
+            # ,clip_range_vf=config.clip_range_vf
             ,normalize_advantage=config.normalize_advantage
             ,ent_coef=config.ent_coef
             ,vf_coef=config.vf_coef
             ,max_grad_norm=config.max_grad_norm
-            ,use_sde=config.use_sde
-            ,sde_sample_freq=config.sde_sample_freq
+            # ,use_sde=config.use_sde
+            # ,sde_sample_freq=config.sde_sample_freq
             #,rollout_buffer_class=config.rollout_buffer_class
             #,rollout_buffer_kwargs=config.rollout_buffer_kwargs
-            ,target_kl=config.target_kl
-            ,stats_window_size=config.stats_window_size
+            # ,target_kl=config.target_kl
+            # ,stats_window_size=config.stats_window_size
             ,tensorboard_log=config.log_dir
-            ,policy_kwargs=config.policy_kwargs
+            # ,policy_kwargs=config.policy_kwargs
             ,verbose=config.verbose
             ,seed=config.seed
             ,device=config.device
-            ,_init_setup_model=config._init_setup_model
+            # ,_init_setup_model=config._init_setup_model
             )
 
 print("model in device: ", model.device)
