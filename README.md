@@ -2,6 +2,7 @@
 
 2024-02 IE801 course project
 
+Code is from https://github.com/Neilus03/DRL_comparative_study
 
 ## Reference
 https://www.gymlibrary.dev/environments/atari/complete_list/
