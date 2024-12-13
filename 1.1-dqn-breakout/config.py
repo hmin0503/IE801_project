@@ -116,7 +116,7 @@ Environment variables
 #n_stack is the number of frames stacked together to form the input to the model
 n_stack = 4
 #n_envs is the number of environments that will be run in parallel
-n_envs = 4
+n_envs = 16
 
 '''
 Wandb configuration
