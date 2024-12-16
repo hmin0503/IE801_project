@@ -8,15 +8,15 @@ from utils import linear_schedule
 env_id = "BreakoutNoFrameskip-v4" # "PongNoFrameskip-v4"
 
 #pretrained is a boolean that indicates if a pretrained model will be loaded
-pretrained = False # Set to True if you want to load a pretrained model
+pretrained = True # Set to True if you want to load a pretrained model
 transfer_type = False # "all" # "all", "policy_network_transfer", "value_network_transfer",  "shared_feature_extractor"
 
 #check_freq is the frequency at which the callback is called, in this case, the callback is called every 2000 timesteps
 check_freq = 2000
 
 #save_path is the path where the best model will be saved
-save_path = f'./PPO_{env_id}_{transfer_type}_1M_save_path'
-checkpoint_path = f"./PPO_{env_id}_{transfer_type}_checkpoint"
+save_path = f'./PPO_{env_id}_{transfer_type}2_1M_save_path'
+checkpoint_path = f"./PPO_{env_id}_{transfer_type}2_checkpoint"
  
 #log_dir is the path where the logs will be saved
 log_dir = f'./log_dir_{env_id}'
@@ -24,8 +24,11 @@ log_dir = f'./log_dir_{env_id}'
 '''
 Saved model path
 '''
-saved_model_path = f"./PPO_{env_id}_{transfer_type}.zip"
-unzip_file_path = f"./PPO_{env_id}_{transfer_type}_unzipped"
+saved_model_path = f"./PPO_{env_id}_{transfer_type}2.zip"
+unzip_file_path = f"./PPO_{env_id}_{transfer_type}2_unzipped"
+
+saved_model_path_pre = f"./PPO_BreakoutNoFrameskip-v4_False.zip"
+unzip_file_path_pre = f"./PPO_BreakoutNoFrameskip-v4_False_unzipped"
 
 
 '''
@@ -139,8 +142,8 @@ project_test = f"{env_id}-PPO-test"
 #entity is the name of the team in wandb
 
 #name is the name of the run in wandb
-name_train = f"PPO_{env_id}_train_{transfer_type}"
-name_test = f"PPO_{env_id}_test_{transfer_type}"
+name_train = f"PPO_{env_id}_train_{transfer_type}2"
+name_test = f"PPO_{env_id}_test_{transfer_type}2"
 #notes is a description of the run
 notes = f"PPO_{env_id} with parameters: {locals()}" #locals() returns a dictionary with all the local variables, in this case, all the variables in this file
 #sync_tensorboard is a boolean that indicates if the tensorboard logs will be synced to wandb

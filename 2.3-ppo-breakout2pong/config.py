@@ -4,35 +4,26 @@ import torch
 
 '''FILE TO STORE ALL THE CONFIGURATION VARIABLES'''
 #environment_id
-env_id = "PongNoFrameskip-v4" # "BreakoutNoFrameskip-v4"
+env_id = "BreakoutNoFrameskip-v4"
 
 #pretrained is a boolean that indicates if a pretrained model will be loaded
-pretrained = False # Set to True if you want to load a pretrained model
-transfer_type = "policy_value_network_transfer" # "all", "policy_network_transfer", "value_network_transfer",  "shared_feature_extractor", "policy_value_network_transfer"
-
-#pretrained model path
-'''
-Pretrained model path
-'''
-pretrained_model_path = "./pretrained/a2c_model_BreakoutNoFrameskip-v4"
-unzip_pretrained_path = "./pretrained/a2c_model_BreakoutNoFrameskip-v4_unzipped"
+pretrained = True # Set to True if you want to load a pretrained model
 
 #check_freq is the frequency at which the callback is called, in this case, the callback is called every 2000 timesteps
 check_freq = 2000
 
 #save_path is the path where the best model will be saved
-save_path = f'./a2c_{env_id}_{transfer_type}2_1M_save_path'
-checkpoint_path = f"./a2c_{env_id}__{transfer_type}2_checkpoint"
+save_path = f'./a2c_{env_id}_1M_save_path'
+checkpoint_path = f"./a2c_{env_id}_checkpoint"
 
 #log_dir is the path where the logs will be saved
-log_dir = f'./log_dir_{env_id}_{transfer_type}2'
+log_dir = f'./log_dir_{env_id}'
 
 '''
 Saved model path
 '''
-saved_model_path = f"./a2c_model_{env_id}_{transfer_type}2.zip"
-unzip_file_path = f"./a2c_model_{env_id}_{transfer_type}2_unzipped"
-
+# saved_model_path = f"./a2c_model_{env_id}.zip"
+# unzip_file_path = f"./a2c_model_{env_id}_unzipped"
 
 '''
 Hyperparameters of the model {learning_rate, gamma, device, n_steps, gae_lambda, ent_coef, vf_coef, max_grad_norm, rms_prop_eps, use_rms_prop, use_sde, sde_sample_freq, normalize_advantage}
@@ -131,8 +122,8 @@ project_test = f"{env_id}-a2c-test"
 #entity is the name of the team in wandb
 
 #name is the name of the run in wandb
-name_train = f"a2c_{env_id}_train-{transfer_type}2"
-name_test = f"a2c_{env_id}_test-{transfer_type}2"
+name_train = f"a2c_{env_id}_train"
+name_test = f"a2c_{env_id}_test"
 #notes is a description of the run
 notes = f"a2c_{env_id} with parameters: {locals()}" #locals() returns a dictionary with all the local variables, in this case, all the variables in this file
 #sync_tensorboard is a boolean that indicates if the tensorboard logs will be synced to wandb

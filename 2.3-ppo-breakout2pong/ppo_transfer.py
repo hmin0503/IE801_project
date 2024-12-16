@@ -8,7 +8,7 @@ understand the parameters of the model, go to config.py and read the comments of
 '''
 Import the necessary libraries and modules
 '''
-from stable_baselines3 import A2C
+from stable_baselines3 import PPO
 from stable_baselines3.common.env_util import make_atari_env
 from stable_baselines3.common.vec_env import VecFrameStack
 from stable_baselines3.common.callbacks import CheckpointCallback
@@ -17,7 +17,7 @@ import torch
 import config_transfer as config
 import wandb
 from wandb.integration.sb3 import WandbCallback
-from utils import make_env, unzip_file, CustomWandbCallback
+from utils import make_env, unzip_file, CustomWandbCallback, linear_schedule
 import os
 import tensorboard as tb
 from tqdm import tqdm
@@ -31,7 +31,6 @@ os.makedirs(config.save_path, exist_ok=True)
 
 #Create the callback that logs the mean reward of the last 100 episodes to wandb
 custom_callback = CustomWandbCallback(config.check_freq, config.save_path)
-
 checkpoint_callback = CheckpointCallback(save_freq=config.check_freq, save_path=config.checkpoint_path)
 
 '''
@@ -39,7 +38,7 @@ Set up loging to wandb
 '''
 #Set wandb to log the training process
 if config.log_to_wandb:
-    wandb.init(project=config.project_train,name=config.name_train, notes=config.notes, sync_tensorboard=config.sync_tensorboard)
+    wandb.init(project=config.project_train, name=config.name_train, notes=config.notes, sync_tensorboard=config.sync_tensorboard)
     #wandb_callback is a callback that logs the training process to wandb, this is done because wandb.watch() does not work with sb3
     wandb_callback = WandbCallback()
 
@@ -56,59 +55,45 @@ print(f"set up the environment - {config.env_id}")
 Set up the model
 '''
 #Create the model with the parameters specified in config.py, go to config.py to see the meaning of each parameter in detail
-model = A2C(
-            policy = config.policy
-            , env = env
-            , verbose=config.verbose
-            , tensorboard_log=config.log_dir
-            , seed=config.seed
-            , policy_kwargs=config.policy_kwargs
-            # , sde_sample_freq=config.sde_sample_freq 
-            , normalize_advantage=config.normalize_advantage
-            # , stats_window_size=config.stats_window_size
-            # , _init_setup_model=config._init_setup_model
-            , device=config.device
-            , learning_rate=config.learning_rate
-            , n_steps=config.n_steps
-            , gamma=config.gamma
-            # , gae_lambda=config.gae_lambda
-            , ent_coef=config.ent_coef
-            , vf_coef=config.vf_coef
-            # , max_grad_norm=config.max_grad_norm
-            , rms_prop_eps=config.rms_prop_eps
-            , use_rms_prop=config.use_rms_prop
-            # , use_sde=config.use_sde,
+model = PPO(policy=config.policy
+            ,env=env
+            ,learning_rate=config.learning_rate
+            ,n_steps=config.n_steps
+            ,batch_size=config.batch_size
+            ,n_epochs=config.n_epochs
+            ,gamma=config.gamma            
+            # ,gae_lambda=config.gae_lambda
+            ,clip_range=config.clip_range
+            # ,clip_range_vf=config.clip_range_vf
+            ,normalize_advantage=config.normalize_advantage
+            ,ent_coef=config.ent_coef
+            ,vf_coef=config.vf_coef
+            ,max_grad_norm=config.max_grad_norm
+            # ,use_sde=config.use_sde
+            # ,sde_sample_freq=config.sde_sample_freq
+            #,rollout_buffer_class=config.rollout_buffer_class
+            #,rollout_buffer_kwargs=config.rollout_buffer_kwargs
+            # ,target_kl=config.target_kl
+            # ,stats_window_size=config.stats_window_size
+            ,tensorboard_log=config.log_dir
+            # ,policy_kwargs=config.policy_kwargs
+            ,verbose=config.verbose
+            ,seed=config.seed
+            ,device=config.device
+            # ,_init_setup_model=config._init_setup_model
             )
-print(f"set up the model - {model}")
 
+print(f"set up the model - {model}")
+print("model in device: ", model.device)
 
 if config.transfer_type != False:
-    source_model = A2C.load(
+    source_model = PPO.load(
             config.pretrained_model_path,
             verbose=config.verbose,
             tensorboard_log=config.log_dir,
             custom_objects={"lr_schedule": lambda _: config.learning_rate}
         )
     print(f"successfully load pretrained model.")
-
-# if config.transfer_type == "all":
-#     print("all networks transfered.")
-#     model.policy.pi_features_extractor.load_state_dict(source_model.policy.features_extractor.state_dict())
-#     model.policy.vf_features_extractor.load_state_dict(source_model.policy.vf_features_extractor.state_dict())
-#     model.policy.features_extractor.load_state_dict(source_model.policy.features_extractor.state_dict())
-
-# elif config.transfer_type == "policy_network_transfer":
-#     print("policy network transfered.")
-#     model.policy.pi_features_extractor.load_state_dict(source_model.policy.pi_features_extractor.state_dict())
-
-# elif config.transfer_type == "value_network_transfer":
-#     print("value network transfered.")
-#     model.policy.vf_features_extractor.load_state_dict(source_model.policy.vf_features_extractor.state_dict())
-
-# elif config.transfer_type == "shared_feature_extractor":
-#     print("shared feature extractor transfered.")
-#     model.policy.features_extractor.load_state_dict(source_model.policy.features_extractor.state_dict())
-#     # config.policy_kwargs = {"features_extractor": source_model.policy.features_extractor}
 
 if config.transfer_type == "all":
     print("all networks transfered.")
@@ -118,7 +103,7 @@ if config.transfer_type == "all":
 
 elif config.transfer_type == "policy_network_transfer":
     print("policy network transfered.")
-    model.policy.load_state_dict(source_model.policy.state_dict(), strict = False)
+    model.policy.features_extractor.load_state_dict(source_model.policy.features_extractor.state_dict(), strict = False)
 
 elif config.transfer_type == "value_network_transfer":
     print("value network transfered.")
@@ -134,7 +119,7 @@ elif config.transfer_type == "policy_value_network_transfer":
 #Load the model if config.pretrained is set to True in config.py
 if config.pretrained:
     # Load the pretrained model without an environment first
-    model = A2C.load(
+    model = PPO.load(
         config.pretrained_model_path,
         verbose=config.verbose,
         tensorboard_log=config.log_dir,

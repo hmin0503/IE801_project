@@ -74,12 +74,11 @@ print("model in device: ", model.device)
 
 #Load the model if config.pretrained is set to True in config.py
 if config.pretrained:
-    print("Loaded pretrained model.")
-    model = PPO.load(config.saved_model_path_pre, env=env, verbose=config.verbose, tensorboard_log=config.log_dir)
+    model = PPO.load(config.saved_model_path, env=env, verbose=config.verbose, tensorboard_log=config.log_dir)
     #Unzip the file a2c_Breakout_1M.zip and store the unzipped files in the folder a2c_Breakout_unzipped
-    unzip_file(config.saved_model_path_pre, config.unzip_file_path_pre) 
-    model.policy.load_state_dict(torch.load(os.path.join(config.unzip_file_path_pre, "policy.pth")))
-    model.policy.optimizer.load_state_dict(torch.load(os.path.join(config.unzip_file_path_pre, "policy.optimizer.pth")))
+    unzip_file(config.saved_model_path, config.unzip_file_path) 
+    model.policy.load_state_dict(torch.load(os.path.join(config.unzip_file_path, "policy.pth")))
+    model.policy.optimizer.load_state_dict(torch.load(os.path.join(config.unzip_file_path, "policy.optimizer.pth")))
 
 '''
 Train the model and save it
