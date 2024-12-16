@@ -7,11 +7,17 @@ Code is from https://github.com/Neilus03/DRL_comparative_study
 Results (wandb): 
 
 DQN Pong https://api.wandb.ai/links/anastlibr-korea-advanced-institute-of-science-and-technology/0qs493ns
+
 DQN Breakout https://api.wandb.ai/links/anastlibr-korea-advanced-institute-of-science-and-technology/4seifzat
+
 PPO Pong https://api.wandb.ai/links/hyangsukmin503-kiast/be37p9cs
+
 PPO Breakout https://api.wandb.ai/links/hyangsukmin503-kiast/4wi60rmz
+
 A2C Pong https://api.wandb.ai/links/hyangsukmin503-kiast/8drljkvb
+
 A2C breakout https://api.wandb.ai/links/anastlibr-korea-advanced-institute-of-science-and-technology/s6ryazj3
+
 
 ## Reference
 https://www.gymlibrary.dev/environments/atari/complete_list/
