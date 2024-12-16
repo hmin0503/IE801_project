@@ -236,3 +236,5 @@ $RECYCLE.BIN/
 logs/
 checkpoints/
 a2c_atari_tensorboard/
+*/*checkpoint
+*/*1M_save_path
