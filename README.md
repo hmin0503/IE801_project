@@ -6,7 +6,7 @@ Code is from https://github.com/Neilus03/DRL_comparative_study
 
 Results (wandb): 
 
-DQN Pong https://api.wandb.ai/links/anastlibr-korea-advanced-institute-of-science-and-technology/0qs493ns
+DQN Pong https://api.wandb.ai/links/anastlibr-korea-advanced-institute-of-science-and-technology/dlfkemfd
 
 DQN Breakout https://api.wandb.ai/links/anastlibr-korea-advanced-institute-of-science-and-technology/4seifzat
 
